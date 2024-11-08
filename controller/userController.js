@@ -17,11 +17,11 @@ exports.postUser = async (req,res) => {
         const userExists = await User.findOne({email:req.body.email})
         if(userExists) return res.status(500).json({errors:true,message:"User already exits"})
             
-            req.body.password = bcrypt.hash(req.body.password,10)
+            req.body.password = await bcrypt.hash(req.body.password,10)
 
             const data = await User.create(req.body)
             return res.json({errors:false,data:data})
-    } catch (error) {
+    } catch (error) { 
         return res.status(500).json({errors:true,message:error.message})
     }
 }
