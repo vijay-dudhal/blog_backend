@@ -48,7 +48,7 @@ exports.deleteUser = async (req,res) => {
 
 exports.login = async (req,res ) => {
     try {
-        const userExists = await User.findOne({email:req.body.emial})
+        const userExists = await User.findOne({email:req.body.email})
         if(!userExists) return res.status(500).json({errors:true,message:"email or password is invalid"})
             const passwordVerify = await bcrypt.compare(req.body.password,userExists.password)
 
