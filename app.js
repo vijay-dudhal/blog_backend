@@ -1,11 +1,14 @@
 const mongoose = require("mongoose")
 const express = require("express")
+const cors = require("cors")
 const userRoute = require("./routes/userRoutes")
 const blogRoute = require("./routes/blogRoutes")
 require("dotenv/config")
 
 const app = express()
+app.use(cors())
 app.use(express.json())
+
 
 app.get("/",(req,res)=>{
     res.send("Home")
@@ -13,6 +16,7 @@ app.get("/",(req,res)=>{
 
 app.use("/api/user",userRoute)
 app.use("/api/blog",blogRoute)
+
 
 app.listen(process.env.PORT)
 
